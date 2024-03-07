@@ -4,7 +4,7 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/todo", {
+    fetch("http://100.93.3.137:3001/todo", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -12,7 +12,7 @@ function App() {
   }, []);
 
   const createTodo = (todoData) => {
-    fetch("http://localhost:3001/todo", {
+    fetch("http://100.93.3.137:3001/todo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

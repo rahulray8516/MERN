@@ -117,3 +117,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
             "__v": 0
         }
     } 
+
+## Commands to remember
+1. git add . ; git commit -a -m "commit" ; git push
+2. npm run dev -- --host 100.93.3.137
