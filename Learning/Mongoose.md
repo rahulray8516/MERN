@@ -45,7 +45,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
     const todoDataGet = require("../src/models/todomodel.cjs")
     app.get("/todo",async (req,res) => {
       try{
-        **const todoss = await todoDataGet.find()**
+        const todoss = await todoDataGet.find()
         res.send(todoss)
       }catch(error){
           res.status(500).json({
