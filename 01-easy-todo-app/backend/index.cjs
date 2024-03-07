@@ -33,8 +33,13 @@ app.get("/todo",async (req,res) => {
 })
 
 app.post("/todo",(req,res) => {
-    const todoBody = req.body;  
-    todoDataGet.save(todoBody)
+    const todoBody = req.body; 
+    const todoBodyCreate = new todoDataGet({
+      ...todoBody
+    }) 
+    todoBodyCreate.save().then((err)=>{
+        console.log(err)
+    })
     res.send(todoBody)
 })
 

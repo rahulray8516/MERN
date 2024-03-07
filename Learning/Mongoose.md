@@ -53,3 +53,17 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
           })
       }
     })
+
+## code to put the data comng from request body/header etc
+
+
+    app.post("/todo",(req,res) => {
+        const todoBody = req.body; 
+        const todoBodyCreate = new todoDataGet({
+          ...todoBody
+        }) 
+        todoBodyCreate.save().then((err)=>{
+            console.log(err)
+        })
+        res.send(todoBody)
+    })
