@@ -33,7 +33,9 @@ app.get("/todo",async (req,res) => {
 })
 
 app.post("/todo",(req,res) => {
-     
+    const todoBody = req.body;  
+    todoDataGet.save(todoBody)
+    res.send(todoBody)
 })
 
 app.delete("/todo/:id",(req,res) => {
