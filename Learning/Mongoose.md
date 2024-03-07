@@ -54,7 +54,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
       }
     })
 
-## code to put the data comng from request body/header etc
+## code to put the data coming from request body/header etc
 
 
     app.post("/todo",(req,res) => {
