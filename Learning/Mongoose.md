@@ -67,3 +67,53 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
         })
         res.send(todoBody)
     })
+
+
+## code to delete the data from the DB Based on custom ID
+
+    app.delete("/todo/:id", async (req, res) => {
+      const id = req.params.id;
+      try {
+          const deletedTodo = await todoDataGet.findOneAndDelete({ id: id });
+          if (!deletedTodo) {
+              res.status(404).json({
+                  message: "Todo not found"
+              });
+          } else {
+              res.json({
+                  message: "Todo deleted",
+                  deleted: deletedTodo
+              });
+          }
+      } catch (error) {
+          res.status(500).json({
+              message: "Error deleting todo"
+          });
+      }
+    });
+
+    Here is the Postman API : http://localhost:3001/todo/3
+    Here is the Data  Saved in DB : 
+    {
+        "_id": {
+          "$oid": "65e5e83215ceb42dc59fb736"
+        },
+        "id": "3",
+        "title": "Vatican City",
+        "description": "Hi All are not  ",
+        "isDone": true,
+        "__v": 0
+    } 
+
+    Here is the response Body
+    {
+        "message": "Todo deleted",
+        "deleted": {
+            "_id": "65e5e83215ceb42dc59fb736",
+            "id": "3",
+            "title": "Vatican City",
+            "description": "Hi All are not  ",
+            "isDone": true,
+            "__v": 0
+        }
+    } 

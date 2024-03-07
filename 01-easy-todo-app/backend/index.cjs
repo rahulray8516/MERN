@@ -40,12 +40,29 @@ app.post("/todo",(req,res) => {
     todoBodyCreate.save().then((err)=>{
         console.log(err)
     })
-    res.send(todoBody)
+    res.send(todoBody) 
 })
 
-app.delete("/todo/:id",(req,res) => {
-    const id = 
-})
+app.delete("/todo/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+      const deletedTodo = await todoDataGet.findOneAndDelete({ id: id });
+      if (!deletedTodo) {
+          res.status(404).json({
+              message: "Todo not found"
+          });
+      } else {
+          res.json({
+              message: "Todo deleted",
+              deleted: deletedTodo
+          });
+      }
+  } catch (error) {
+      res.status(500).json({
+          message: "Error deleting todo"
+      });
+  }
+});
 
 app.listen(port,() => {
     console.log("Server is Started on PORT",port)
