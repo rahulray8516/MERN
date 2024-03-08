@@ -39,7 +39,13 @@ function App() {
   const updateTodo = () => {};
 
   const onDeleteID = (id) => {
-    
+      fetch(`http://100.93.3.137:3001/todo/${id}`,{
+        method : 'DELETE'
+      })
+        .then((response) => response.json())
+        .then(()=>{
+          setTodos(todos.filter((item)=> item.id !== id))
+        })
   };
 
   return (
@@ -53,6 +59,7 @@ function App() {
                 title={x.title}
                 description={x.description}
                 isDone={x.isDone}
+                onDelete={()=>onDeleteID(x.id)}
               ></Todo>
             </div>
           );
@@ -113,7 +120,7 @@ function Todo(props) {
       {props.description},<br />
       {props.isDone}
       <br />
-      <button onClick={() => onDeleteID(id)}> Delete </button>
+      <button onClick={props.onDelete}> Delete </button>
     </div>
   );
 }

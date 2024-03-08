@@ -118,6 +118,29 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
         }
     } 
 
+## Code to delete any Todo using delete Button
+
+    Ye top me rhega
+
+      const onDeleteID = (id) => {
+        fetch(`http://100.93.3.137:3001/todo/${id}`,{
+          method : 'DELETE'
+        })
+          .then((response) => response.json())
+          .then(()=>{
+            setTodos(todos.filter((item)=> item.id !== id))
+          })
+    };
+    <Todo
+      id={x.id}
+      title={x.title}
+      description={x.description}
+      isDone={x.isDone}
+      onDelete={()=>onDeleteID(x.id)}
+    ></Todo>
+
+    <button onClick={props.onDelete}> Delete </button>
+
 ## Commands to remember
 1. git add . ; git commit -a -m "commit" ; git push
 2. npm run dev -- --host 100.93.3.137
