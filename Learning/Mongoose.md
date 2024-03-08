@@ -136,7 +136,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
       title={x.title}
       description={x.description}
       isDone={x.isDone}
-      onDelete={()=>onDeleteID(x.id)}
+      onDelete={ () => onDeleteID(x.id) }
     ></Todo>
 
     <button onClick={props.onDelete}> Delete </button>
