@@ -38,7 +38,9 @@ function App() {
   };
   const updateTodo = () => {};
 
-  const deleteTodo = () => {};
+  const onDeleteID = (id) => {
+    
+  };
 
   return (
     <>
@@ -104,7 +106,6 @@ function App() {
 }
 
 function Todo(props) {
-  const handleDeleteTodo = () => {};
   return (
     <div key={props.id}>
       {props.id},<br />
@@ -112,6 +113,7 @@ function Todo(props) {
       {props.description},<br />
       {props.isDone}
       <br />
+      <button onClick={() => onDeleteID(id)}> Delete </button>
     </div>
   );
 }
