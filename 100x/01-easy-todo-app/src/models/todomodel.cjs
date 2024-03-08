@@ -12,8 +12,8 @@ const todoSchema = mongoose.Schema({
       type : String,
     },
     isDone : {
-      type : Boolean,
-      default : false
+      type : String,
+      default : "false"
     }
 })
 
