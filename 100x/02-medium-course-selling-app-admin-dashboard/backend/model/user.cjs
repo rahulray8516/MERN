@@ -15,5 +15,5 @@ var userSchema = mongoose.Schema({
     }
 });
 
-const Admin = mongoose.model('SellingCoursesUser',adminSchema)
-module.exports = Admin
+const USER = mongoose.model('SellingCoursesUser',userSchema)
+module.exports = USER
