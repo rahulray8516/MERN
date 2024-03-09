@@ -22,8 +22,6 @@ mongoose.connection.on('error', (err)=> {
 
 
 
-
-
 app.listen(3002,'100.93.3.137',() => {
     console.log(`Backend is running on PORT : 3002`)
 })

@@ -16,6 +16,5 @@ var adminSchema = mongoose.Schema({
     }
 });
 
-const Admin = mongoose.model('SellingCoursesAdmin',adminSchema)
+const Admin = mongoose.model('SellingCourseAdmin',adminSchema)
 module.exports = Admin
-
