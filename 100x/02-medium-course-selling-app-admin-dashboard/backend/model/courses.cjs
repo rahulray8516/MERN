@@ -16,6 +16,12 @@ var coursesSchema = mongoose.Schema({
         type : Float32Array,
         default : 0.00,
         required : true
+    },
+    isPostedby : {
+        type : String
+    },
+    isPurchasedBy :{
+        type : String
     }
 });
 
