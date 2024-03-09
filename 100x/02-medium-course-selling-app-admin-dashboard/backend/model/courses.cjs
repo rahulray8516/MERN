@@ -1,29 +1,29 @@
 const mongoose = require('mongoose')
 var coursesSchema = mongoose.Schema({
-    courseID : {
-        type : String
+    courseID: {
+        type: String
     },
-    courseTitle : {
-        type : String
+    courseTitle: {
+        type: String
     },
-    courseDescription : {
-        type : String
+    courseDescription: {
+        type: String
     },
-    courseImage : {
-        type : URL
+    courseImage: {
+        type: URL
     },
-    coursePrice : {
-        type : Float32Array,
-        default : 0.00,
-        required : true
+    coursePrice: {
+        type: Float32Array,
+        default: 0.00,
+        required: true
     },
-    isPostedby : {
-        type : String
+    isPostedby: {
+        type: String
     },
-    isPurchasedBy :{
-        type : String
+    isPurchasedBy: {
+        type: String
     }
 });
 
-const Courses = mongoose.model('Courses',coursesSchema)
+const Courses = mongoose.model('Courses', coursesSchema)
 module.exports = Courses

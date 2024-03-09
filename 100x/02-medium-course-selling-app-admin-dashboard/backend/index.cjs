@@ -20,8 +20,13 @@ mongoose.connection.on('error', (err)=> {
     console.log(`mongoose Error: ${err}`)
 })
 
+const courses = require('./model/courses.cjs')
 
-
+app.post('/createCourse', (req,res)=> {
+    const courseRequestBody = req.body;
+    const courseFinalBody = new courses(courseRequestBody)
+    
+})
 app.listen(3002,'100.93.3.137',() => {
     console.log(`Backend is running on PORT : 3002`)
 })
