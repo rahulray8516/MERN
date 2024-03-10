@@ -141,6 +141,62 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
 
     <button onClick={props.onDelete}> Delete </button>
 
+## All the possible find methods in mongoose
+
+    In Mongoose, there are several `find` methods you can use to query documents in a MongoDB collection. Here are the most common ones:
+
+1. **Model.find():** Finds all documents that match the query criteria.
+   ```javascript
+   const courses = await Course.find({ category: 'Web Development' });
+   ```
+
+2. **Model.findOne():** Finds the first document that matches the query criteria.
+   ```javascript
+   const course = await Course.findOne({ courseID: 'C001' });
+   ```
+
+3. **Model.findById():** Finds a single document by its ID.
+   ```javascript
+   const course = await Course.findById('1234567890');
+   ```
+
+4. **Model.findByIdAndDelete():** Finds a document by its ID and deletes it.
+   ```javascript
+   const deletedCourse = await Course.findByIdAndDelete('1234567890');
+   ```
+
+5. **Model.findByIdAndRemove():** Finds a document by its ID and removes it.
+   ```javascript
+   const removedCourse = await Course.findByIdAndRemove('1234567890');
+   ```
+
+6. **Model.findOneAndUpdate():** Finds a document that matches the query criteria and updates it.
+   ```javascript
+   const updatedCourse = await Course.findOneAndUpdate({ courseID: 'C001' }, { $set: { courseTitle: 'New Title' } }, { new: true });
+   ```
+
+7. **Model.findOneAndDelete():** Finds a document that matches the query criteria and deletes it.
+   ```javascript
+   const deletedCourse = await Course.findOneAndDelete({ courseID: 'C001' });
+   ```
+
+8. **Model.findOneAndRemove():** Finds a document that matches the query criteria and removes it.
+   ```javascript
+   const removedCourse = await Course.findOneAndRemove({ courseID: 'C001' });
+   ```
+
+9. **Model.find().sort():** Finds all documents and sorts them based on the specified criteria.
+   ```javascript
+   const courses = await Course.find().sort({ coursePrice: -1 });
+   ```
+
+10. **Model.find().limit():** Finds all documents but limits the number of documents returned.
+    ```javascript
+    const courses = await Course.find().limit(10);
+    ```
+
+These are some of the common `find` methods in Mongoose. The actual method you use depends on your specific use case and the query you need to perform.
+
 ## Commands to remember
 1. git add . ; git commit -a -m "commit" ; git push
 2. npm run dev -- --host 100.93.3.137

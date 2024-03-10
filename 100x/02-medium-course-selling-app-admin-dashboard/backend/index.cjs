@@ -55,7 +55,21 @@ app.post('/createCourse', async (req, res) => {
 app.put('/updateCourse/:id', async (req, res)=>{
     try{
         const id = req.params.id;
-        
+        const updates = req.body;
+
+        const updatedCourse = await courses.findOne({courseID:id})
+        if(!updatedCourse){
+            return res.status(404).send("No Course Found")
+        }
+
+        Object.keys(updates).forEach((key)=>{
+                if(updates[key]!==null){
+                    updatedCourse[key]=updates[key];
+                }
+        })
+
+        await updatedCourse.save()
+        res.send(updatedCourse)
     }catch(error){
         console.log(error)
         res.status(500).send({
