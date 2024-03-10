@@ -1,16 +1,22 @@
 const mongoose = require('mongoose')
 var coursesSchema = mongoose.Schema({
     courseID: {
-        type: String
+        type: String,
+        unique : true,
+        required : true
     },
     courseTitle: {
-        type: String
+        type: String,
+        required : true
     },
     courseDescription: {
-        type: String
+        type: String,
+        required : true
     },
     courseImage: {
-        type: String
+        type: String,
+        default : "https://cdn5.vectorstock.com/i/1000x1000/30/59/online-course-vector-27123059.jpg",
+        required : true
     },
     coursePrice: {
         type: Number,
