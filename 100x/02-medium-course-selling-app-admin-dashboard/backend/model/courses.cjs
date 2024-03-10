@@ -10,10 +10,10 @@ var coursesSchema = mongoose.Schema({
         type: String
     },
     courseImage: {
-        type: URL
+        type: String
     },
     coursePrice: {
-        type: Float32Array,
+        type: Number,
         default: 0.00,
         required: true
     },

@@ -25,27 +25,21 @@ const courses = require('./model/courses.cjs')
 app.get('/courses',async(req,res)=>{
 
 })
-app.post('/createCourse', async(req,res)=> {
+app.post('/createCourse', async (req, res) => {
+    try {
+        const courseRequestBody = req.body;
+        const courseFinalBody = new courses(courseRequestBody); // Directly pass the request body
 
-    try{
-        const courseRequestBody = req.body
-        const courseFinalBody = new courses({
-            ...courseRequestBody
-        })
-        courseFinalBody.save().then(()=>{
-            console.log("Data Saved Successfully!")
-            res.status(201).send(courseFinalBody)
-        }).catch((err)=>{
-            console.log(err);
-            res.status(400).send(err)
-        })
-        
-    } catch(e){
-        console.log(e)
-        res.status(500).send("/nError in Saving Data")
+        await courseFinalBody.save(); // Using async/await for consistency
+        console.log("Data Saved Successfully!");
+        res.status(201).send(courseFinalBody);
+    } catch (error) {
+        console.error(error); // More detailed error logging
+        res.status(500).send({ message: "Error in Saving Data", error: error.message });
     }
-})
-app.listen(3002,'100.93.3.137',() => {
+});
+
+app.listen(3002,"100.93.3.137",() => {
     console.log(`Backend is running on PORT : 3002`)
 })
 
