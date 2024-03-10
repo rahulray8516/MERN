@@ -16,7 +16,6 @@ var coursesSchema = mongoose.Schema({
     courseImage: {
         type: String,
         default : "https://cdn5.vectorstock.com/i/1000x1000/30/59/online-course-vector-27123059.jpg",
-        required : true
     },
     coursePrice: {
         type: Number,

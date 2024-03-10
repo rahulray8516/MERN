@@ -26,6 +26,16 @@ const courses = require('./model/courses.cjs')
 
 app.get('/courses',async(req,res)=>{
 
+    try{
+        const allCourses= await courses.find({})
+        res.send(allCourses)
+    }catch(error){
+        console.log(error)
+        res.status(500).send({
+            message : "Error in Fetching Data",
+            error : error.message
+        })
+    }
 })
 app.post('/createCourse', async (req, res) => {
     try {
@@ -41,6 +51,19 @@ app.post('/createCourse', async (req, res) => {
         res.status(500).send({ message: "Error in Saving Data", error: error.message });
     }
 });
+
+app.put('/updateCourse/:id', async (req, res)=>{
+    try{
+        const id = req.params.id;
+        
+    }catch(error){
+        console.log(error)
+        res.status(500).send({
+            message : "Failed To Update",
+            error : error.message
+        })
+    }
+})
 
 app.listen(port,"100.93.3.137",() => {
     console.log(`Backend is running on PORT : ${port}`)
