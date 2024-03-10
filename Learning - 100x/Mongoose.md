@@ -144,7 +144,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
 
 ## All the possible find methods in mongoose
 
-    In Mongoose, there are several `find` methods you can use to query documents in a MongoDB collection. Here are the most common ones:
+In Mongoose, there are several `find` methods you can use to query documents in a MongoDB collection. Here are the most common ones:
 
 1. **Model.find():** Finds all documents that match the query criteria.
    ```javascript
