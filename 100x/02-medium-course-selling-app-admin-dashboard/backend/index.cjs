@@ -41,7 +41,6 @@ app.post('/createCourse', async (req, res) => {
         res.status(500).send({ message: "Error in Saving Data", error: error.message });
     }
 });
- 
 app.listen(port,"100.93.3.137",() => {
     console.log(`Backend is running on PORT : ${port}`)
 })
