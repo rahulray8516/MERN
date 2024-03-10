@@ -1,7 +1,7 @@
 This Text file contain all the Necessary Code snippet Related to MongoDB
 
 ## Code to Define a model
-
+  ```javascript
     const mongoose = require('mongoose')
     
     const todoSchema = mongoose.Schema({
@@ -23,9 +23,9 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
     
     const todo = mongoose.model('todos',todoSchema)
     module.exports = todo
-
+  ```
 ## Code to Connect to Mongoose
-
+  ```javascript
     const mongoose = require('mongoose')
     const connectionString = ""
     
@@ -39,9 +39,9 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
     mongoose.connection.on('error', (err) => {
       console.log('Error Connecting to MongoDB',err)
     })
-
+  ```
 ## code to get the data from DB
-
+  ```javascript
     const todoDataGet = require("../src/models/todomodel.cjs")
     app.get("/todo",async (req,res) => {
       try{
@@ -53,10 +53,10 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
           })
       }
     })
-
+  ```
 ## code to put the data coming from request body/header etc
 
-
+  ```javascript
     app.post("/todo",(req,res) => {
         const todoBody = req.body; 
         const todoBodyCreate = new todoDataGet({
@@ -67,10 +67,10 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
         })
         res.send(todoBody)
     })
-
+  ```
 
 ## code to delete the data from the DB Based on custom ID
-
+  ```javascript
     app.delete("/todo/:id", async (req, res) => {
       const id = req.params.id;
       try {
@@ -117,11 +117,11 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
             "__v": 0
         }
     } 
-
+  ```
 ## Code to delete any Todo using delete Button IN FRONTEND
 
     Ye top me rhega
-    ```javascript
+  ```javascript
       const onDeleteID = (id) => {
         fetch(`http://100.93.3.137:3001/todo/${id}`,{
           method : 'DELETE'
@@ -140,7 +140,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
     ></Todo>
 
     <button onClick={props.onDelete}> Delete </button>
-    ```
+  ```
 
 ## All the possible find methods in mongoose
 
@@ -197,6 +197,9 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
     ```
 
 These are some of the common `find` methods in Mongoose. The actual method you use depends on your specific use case and the query you need to perform.
+
+
+
 
 ## Commands to remember
 1. git add . ; git commit -a -m "commit" ; git push
