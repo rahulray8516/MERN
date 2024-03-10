@@ -54,21 +54,35 @@ app.post('/createCourse', async (req, res) => {
 
 app.put('/updateCourse/:id', async (req, res)=>{
     try{
+        var changes=[];
         const id = req.params.id;
         const updates = req.body;
-
-        const updatedCourse = await courses.findOne({courseID:id})
-        if(!updatedCourse){
+        const existedCourse = await courses.findOne({courseID:id})
+        if(!existedCourse){
             return res.status(404).send("No Course Found")
         }
         //Updating only those fields which are changed
         Object.keys(updates).forEach((key)=>{
                 if(updates[key]!==null){
-                    updatedCourse[key]=updates[key];
+                    if(existedCourse[key]!==updates[key]){
+                        changes.push({[key] : existedCourse[key]})
+                        existedCourse[key]=updates[key];
+                    }
                 }
         })
-        await updatedCourse.save()
-        res.send(updatedCourse)
+        await existedCourse.save()
+        if(changes.length===0){
+            res.send({
+                message : "No Change Detected"
+            })
+        }else{
+            res.send({
+                message : "Course Updated SuccessFully",
+                changedKeys : changes,
+                updatedBody : existedCourse
+            })
+        }
+        
     }catch(error){
         console.log(error)
         res.status(500).send({
@@ -81,18 +95,22 @@ app.put('/updateCourse/:id', async (req, res)=>{
 app.delete('/deleteCourse/:id',async (req,res)=>{
     try{
         const id = req.params.id;
-        const deltedCourse = await findOneAndDelete({courseID : id});
+        const deltedCourse = await courses.findOneAndDelete({courseID : id});
         if(!deltedCourse){
             console.log("No Such Course Exist")
             res.send({
                 message : "No Such Course Exist"
             })
         }
-        
+        else{
+            res.status(200).send({
+                message : 'Deleted Successfully Course with ID : '+ id
+            });
+        }
     }catch(error){
         console.log(error)
         res.status(500).send({
-            message : "Failed to delte Course with ID : " + req.params.id,
+            message : "Failed to delte Course with ID : " +  req.params.id,
             error : error.message
         })
     }
