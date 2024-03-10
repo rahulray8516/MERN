@@ -22,10 +22,28 @@ mongoose.connection.on('error', (err)=> {
 
 const courses = require('./model/courses.cjs')
 
-app.post('/createCourse', (req,res)=> {
-    const courseRequestBody = req.body;
-    const courseFinalBody = new courses(courseRequestBody)
-    
+app.get('/courses',async(req,res)=>{
+
+})
+app.post('/createCourse', async(req,res)=> {
+
+    try{
+        const courseRequestBody = req.body
+        const courseFinalBody = new courses({
+            ...courseRequestBody
+        })
+        courseFinalBody.save().then(()=>{
+            console.log("Data Saved Successfully!")
+            res.status(201).send(courseFinalBody)
+        }).catch((err)=>{
+            console.log(err);
+            res.status(400).send(err)
+        })
+        
+    } catch(e){
+        console.log(e)
+        res.status(500).send("/nError in Saving Data")
+    }
 })
 app.listen(3002,'100.93.3.137',() => {
     console.log(`Backend is running on PORT : 3002`)
