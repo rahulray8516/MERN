@@ -28,7 +28,18 @@ app.get('/courses',async(req,res)=>{
 
 })
 app.post('/createCourse', async (req, res) => {
-    res.send("Connected Here")
+    try {
+        const courseRequestBody = req.body;
+        const courseFinalBody = new courses({
+            ...courseRequestBody
+        }); // Directly pass the request body
+        await courseFinalBody.save();
+        console.log("Data Saved Successfully!");
+        res.status(201).send(courseFinalBody);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Error in Saving Data", error: error.message });
+    }
 });
 
 app.listen(port,"100.93.3.137",() => {
