@@ -22,8 +22,6 @@ mongoose.connection.on('error', (err)=> {
     console.log(`mongoose Error: ${err}`)
 })
 
-const courses = require('./model/courses.cjs')
-
 app.get('/courses',async(req,res)=>{
 
     try{
