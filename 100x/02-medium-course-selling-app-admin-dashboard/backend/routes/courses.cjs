@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-
-const courses = require('../model/courses.cjs')
+const courses = require('../model/courses.cjs') 
 router.get('/courses',async(req,res)=>{
 
     try{
