@@ -61,7 +61,7 @@ app.put('/updateCourse/:id', async (req, res)=>{
         if(!updatedCourse){
             return res.status(404).send("No Course Found")
         }
-
+        //Updating only those fields which are changed
         Object.keys(updates).forEach((key)=>{
                 if(updates[key]!==null){
                     updatedCourse[key]=updates[key];

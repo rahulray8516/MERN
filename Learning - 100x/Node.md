@@ -1,5 +1,5 @@
 ## Code to update the fields which are changed only
-
+    ```javascript
     app.put('/updateCourse/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -28,3 +28,4 @@
         res.status(500).send({ message: "Failed to update course.", error: error.message });
     }
 });
+    ```
