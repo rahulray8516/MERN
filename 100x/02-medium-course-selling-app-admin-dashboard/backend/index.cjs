@@ -67,7 +67,6 @@ app.put('/updateCourse/:id', async (req, res)=>{
                     updatedCourse[key]=updates[key];
                 }
         })
-
         await updatedCourse.save()
         res.send(updatedCourse)
     }catch(error){
@@ -79,6 +78,25 @@ app.put('/updateCourse/:id', async (req, res)=>{
     }
 })
 
+app.delete('/deleteCourse/:id',async (req,res)=>{
+    try{
+        const id = req.params.id;
+        const deltedCourse = await findOneAndDelete({courseID : id});
+        if(!deltedCourse){
+            console.log("No Such Course Exist")
+            res.send({
+                message : "No Such Course Exist"
+            })
+        }
+        
+    }catch(error){
+        console.log(error)
+        res.status(500).send({
+            message : "Failed to delte Course with ID : " + req.params.id,
+            error : error.message
+        })
+    }
+})
 app.listen(port,"100.93.3.137",() => {
     console.log(`Backend is running on PORT : ${port}`)
 })
