@@ -121,7 +121,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
 ## Code to delete any Todo using delete Button IN FRONTEND
 
     Ye top me rhega
-
+    ```javascript
       const onDeleteID = (id) => {
         fetch(`http://100.93.3.137:3001/todo/${id}`,{
           method : 'DELETE'
@@ -140,6 +140,7 @@ This Text file contain all the Necessary Code snippet Related to MongoDB
     ></Todo>
 
     <button onClick={props.onDelete}> Delete </button>
+    ```
 
 ## All the possible find methods in mongoose
 
