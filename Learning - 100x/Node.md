@@ -32,32 +32,35 @@
 
 ## JWT Auth Token Code
 
-    ```javascript
+  ```javascript
     const generateJWT = (user) => {
     const payload = user
     console.log("Payload is : ", payload)
     return jwt.sign(payload,secretKey,options)
 }
 
-const authenticateJWT = (req,res,next) => {
-    const auth = req.headers.authorization
-    
-    if(auth){
-        const token = auth.split(' ')[1]
-        jwt.verify(token,secretKey,(err,user) => {
-            if(err){
-                console.log("Error Occurred at verify token Stage")
-                return res.status(403).json({
-                    message : "Sorry Token Extraction Issue"
-                })
+const authenticateJWT = (req, res, next) => {
+    // Typically, the token is sent in the Authorization header
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        // Bearer schema is expected, so split by space and get the token part
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, secretKey, (err, user) => {
+            if (err) {
+                // If there's an error during verification, such as token expiration
+                return res.sendStatus(403); // Forbidden access
             }
-            req.user = user
-            next()
+
+            // If verification is successful, the decoded payload is attached to the request object
+            req.user = user;
+            next(); // Proceed to the next middleware/route handler
         });
-    }else{
-        res.status(401).json({
-            message : "auth header is wrong , please check"
-        })
+    } else {
+        // If the Authorization header is missing, deny access
+        res.sendStatus(401); // Unauthorized access
     }
-}
+};
+
 ```

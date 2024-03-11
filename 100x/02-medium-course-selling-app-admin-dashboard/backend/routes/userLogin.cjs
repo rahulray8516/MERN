@@ -1,8 +1,3 @@
-const generateJWT = (user) => {
-    const payload = user
-    console.log("Payload is : ", payload)
-    return jwt.sign(payload,secretKey,options)
-}
 
 const authenticateJWT = (req,res,next) => {
     const auth = req.headers.authorization
