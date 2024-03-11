@@ -10,7 +10,7 @@ var adminSchema = mongoose.Schema({
     email : {type : String},
     userName : {
         type: String,
-        unique : true , 
+        unique : false , 
         required : true
     },
     password : {

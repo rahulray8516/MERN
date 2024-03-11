@@ -4,8 +4,8 @@ var secretKey = "Sec3et"
 var options = {
     expiresIn : '1h'
 }
-const generateJWT = (user) => {
-    const payload = user
+const generateJWT = (userName) => {
+    const payload = userName
     return jwt.sign(payload,secretKey,options)
 }
 
