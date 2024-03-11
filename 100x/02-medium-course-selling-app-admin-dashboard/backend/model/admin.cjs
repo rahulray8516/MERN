@@ -3,9 +3,12 @@ var adminSchema = mongoose.Schema({
 
     isAdmin : {
         type : Boolean,
-        required : true
+        default : true
     },
-    username : {
+    firstName: { type: String},
+    lastName: { type: String},
+    email : {type : String},
+    userName : {
         type: String,
         unique : true , 
         required : true
@@ -13,7 +16,7 @@ var adminSchema = mongoose.Schema({
     password : {
         type : String,
         required : true
-    }
+    },
 });
 
 const Admin = mongoose.model('SellingCoursesAdmin',adminSchema)

@@ -5,14 +5,16 @@ router.post("/signup",async (req,res) => {
     try{
         const adminModel = require('../model/admin.cjs')
         const userExist = adminModel.findOne(req.body.userName)
+
         if(userExist){
             return res.status(500).send({
-                message : "User Exist Mate , Back OFF!"
-            })
-        }
-        const { firstName, lastName, email, userName, password } = req.body;
+                message : "User Exist Mate , Back OFF!",
+            And : userExist         
+        })}
+        const {firstName, lastName, email, userName, password } = req.body;
         const newAdmin = new adminModel({
-        firstName, lastName, email, userName, password })
+        firstName:firstName, lastName:lastName, email:email, 
+        userName : userName, password:password })
         await newAdmin.save()
     }catch(error){
         console.log("Error in Saving SignUp Data")
