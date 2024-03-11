@@ -28,7 +28,7 @@
         res.status(500).send({ message: "Failed to update course.", error: error.message });
     }
 });
-    ```
+  ```
 
 ## JWT Auth Token Code
 
