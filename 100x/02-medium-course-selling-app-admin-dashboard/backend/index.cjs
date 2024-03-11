@@ -7,8 +7,6 @@ const mongoose = require('mongoose')
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
-var coursesRoute = require('./routes/courses.cjs')
-
 //mongoose Connection
 const connectionString = "mongodb+srv://rahulray8518:rahulray85188101@cluster0.oveeh21.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect(connectionString)
@@ -23,10 +21,8 @@ mongoose.connection.on('error', (err)=> {
 })
 
 //Routes
-app.use('/courses',coursesRoute);
-
-
-
+app.use('/courses',require('./routes/courses.cjs'));
+app.use('/admin',require('./routes/adminLogin.cjs'))
 app.listen(port,"100.93.3.137",() => {
     console.log(`Backend is running on PORT : ${port}`)
 })
