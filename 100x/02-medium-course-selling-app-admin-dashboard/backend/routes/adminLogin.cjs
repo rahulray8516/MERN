@@ -8,9 +8,8 @@ router.post("/signup",async (req,res) => {
 
         if(userExist){
             return res.status(500).send({
-                message : "User Exist Mate , Back OFF!",
-            And : userExist         
-        })}
+                message : "User Exist Mate , Back OFF!"
+            })}
         const {firstName, lastName, email, userName, password } = req.body;
         const newAdmin = new adminModel({
         firstName:firstName, lastName:lastName, email:email, 
