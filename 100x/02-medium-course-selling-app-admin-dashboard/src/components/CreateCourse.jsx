@@ -3,6 +3,7 @@ import React from "react";
 /// I've added one input so you understand the api to do it.
 function CreateCourse() {
     const [title, setTitle] = React.useState("");
+    
 
     return <div>
         <h1>Create Course Page</h1>
