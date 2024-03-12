@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { generateJWT , authenticateJWT} = require('../auth/auth.cjs');
+const cors = require('cors');
+router.use(cors());
 
 
 router.post("/signup",async (req,res) => {
