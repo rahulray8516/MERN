@@ -5,7 +5,7 @@ var options = {
     expiresIn : '1h'
 }
 const generateJWT = (userName) => {
-    const payload = userName
+    const payload = {userName}//payload always be object not string
     return jwt.sign(payload,secretKey,options)
 }
 
