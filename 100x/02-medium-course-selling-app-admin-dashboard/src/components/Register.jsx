@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /// File is incomplete. You need to add input boxes to take input for users to register.
 function Register() {
@@ -7,6 +8,7 @@ function Register() {
     const [userName,setUserName] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
         console.log(`${firstName}, ${lastName}, ${userName}, ${email},${password}`)
@@ -30,7 +32,7 @@ function Register() {
             console.log("data",data)
             if(response.status === 200){ 
                 alert('Registration Successful')
-                // window.location.href='';
+                navigate( "/login" )
             }else{
                 alert('Error in Registration');
             }
