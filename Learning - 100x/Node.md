@@ -156,3 +156,16 @@ const authenticateJWT = (req, res, next) => {
     ```
 
 
+## HoW TO USE Router to navigate for cleaninest URL
+
+    ```javascript
+    <Router>
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/about" element={<CreateCourse />} />
+                <Route path="/courses" element={<ShowCourses />} />
+            </Routes>
+        </Router>
+    ```

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 var coursesSchema = mongoose.Schema({
     courseID: {
         type: String,
-        unique : true,
+        unique : false,
         required : true
     },
     courseTitle: {

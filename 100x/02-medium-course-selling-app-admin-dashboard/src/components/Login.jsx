@@ -1,10 +1,11 @@
 import  { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /// File is incomplete. You need to add input boxes to take input for users to login.
 function Login() {
     const [userName,setUserName] = useState("")
     const [password,setPassword] = useState("")
-
+     const navigate = useNavigate();
     const handleLogin = () => {
         loginUser()
         console.log(`${userName},${password}`);
@@ -24,7 +25,8 @@ function Login() {
             console.log("data : ",data)
             console.log("Response : ",response)
             if(response.status===200){
-                 alert("Logged In Successfully")
+                alert('Successfully Logged In')
+                navigate("/courses")
             }else{
                  alert("Invalid Username or Password");
             }

@@ -23,7 +23,7 @@ router.post('/createCourse', async (req, res) => {
         }); // Directly pass the request body
         await courseFinalBody.save();
         console.log("Data Saved Successfully!");
-        res.status(201).send(courseFinalBody);
+        res.status(200).send(courseFinalBody);
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: "Error in Saving Data", error: error.message });
