@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 /// You need to add input boxes to take input for users to create a course.
 /// I've added one input so you understand the api to do it.
 function CreateCourse() {
-    const [courses,setCourses] = useState([])
     const [courseID, setCourseID] = useState("")
     const [courseTitle,setCourseTitle] = useState("")
     const [courseDescription,setCourseDescription] = useState("")
@@ -10,10 +9,6 @@ function CreateCourse() {
     const [coursePrice, setCoursePrice] = useState("")
     const [isPostedby, setIsPostedBy] = useState("")
     const [isPurchasedBy, setIsPurchasedBy] = useState("")
-
-    useEffect(() => {
-        fetchCourses();
-     },[])
 
     const handleCreateCourse = () => {
         createCourse();
@@ -68,28 +63,7 @@ function CreateCourse() {
         }
     }
 
-    const fetchCourses = async() => {
-
-    try{
-            const response = await fetch('http://100.93.3.137:3001/courses/courses',{
-            method : 'GET',
-            headers : {
-                'Content-Type' : 'application/json' 
-            }
-        });
-
-        const data = await response.json();
-        if(response.status === 200) {
-            setCourses(data)
-            console.log("Courses Fetched SuccessFully")
-            console.log(data)
-        }else{
-            console.log("Fetching Error")
-        }
-    }catch(error){
-        console.log(error.message)
-        }
-    }
+    
     return <div>
         <h1>Create Course Page</h1>      
         courseID: <input type="text" value={courseID} onChange={e => setCourseID(e.target.value)} /><br/>
@@ -101,7 +75,7 @@ function CreateCourse() {
         isPurchasedBy: <input type="text" value={isPurchasedBy} onChange={e=>setIsPurchasedBy(e.target.value)}/><br/>
         <button onClick={handleCreateCourse}>Create Course</button><br/>
         <div>
-        {courses.map(course => (
+        {/* {courses.map(course => (
                     <div key={course._id}>
                         <h3>{course.courseTitle}</h3>
                         <p>{course.courseDescription}</p>
@@ -112,7 +86,7 @@ function CreateCourse() {
                         <button onClick>Update</button>
                         <button onClick>Delete</button>
                     </div>
-                ))}
+                ))} */}
         </div>
      </div>
 }
