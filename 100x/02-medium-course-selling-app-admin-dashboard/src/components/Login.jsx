@@ -6,7 +6,7 @@ function Login() {
     const [userName,setUserName] = useState("")
     const [password,setPassword] = useState("")
      const navigate = useNavigate();
-    const handleLogin = () => {
+    const handleLogin = async() => {
         loginUser()
         console.log(`${userName},${password}`);
     }
@@ -22,18 +22,16 @@ function Login() {
                 })
             })
             const data  = await response.json()
-            console.log("data : ",data)
-            console.log("Response : ",response)
+            console.log(data)         
             if(response.status===200){
+                localStorage.setItem('token',data.token)
                 alert('Successfully Logged In')
-                navigate("/courses")
+                navigate("/dashboard")
             }else{
                  alert("Invalid Username or Password");
             }
-
         }catch(error){
             console.log(error.message)
-            alert(error.message)
         }
     }
 
@@ -42,7 +40,7 @@ function Login() {
         <br/>
         userName - <input type="text" value={userName} onChange={e => setUserName(e.target.value)} />
         <br/>
-        password - <input type="password" value={password} onChange={e=> setPassword(e.target.value)}/>
+        password - <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
         <button onClick={handleLogin}>Login</button>
         <br/>
         New here? <a href="/register">Register</a>
