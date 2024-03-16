@@ -10,7 +10,7 @@ function Login() {
         loginUser()
         console.log(`${userName},${password}`);
     }
-    const loginUser = async() =>{
+    const loginUser = async() => {
         try{
             const response = await fetch("http://100.93.3.137:3001/admin/login",{
                 method : 'POST',

@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-
+const {authenticateJWT} = require('../auth/auth.cjs')
 const courses = require('../model/courses.cjs') 
-router.get('/courses',async(req,res)=>{
-
+router.get('/courses',authenticateJWT,async(req,res)=>{
+    console.log(req.headers)
     try{
-        const allCourses= await courses.find({})
+        const allCourses = await courses.find({})
         res.send(allCourses)
     }catch(error){
         console.log(error)
@@ -15,7 +15,7 @@ router.get('/courses',async(req,res)=>{
         })
     }
 })
-router.post('/createCourse', async (req, res) => {
+router.post('/createCourse',authenticateJWT, async (req, res) => {
     try {
         const courseRequestBody = req.body;
         const courseFinalBody = new courses({
@@ -30,7 +30,7 @@ router.post('/createCourse', async (req, res) => {
     }
 });
 
-router.put('/updateCourse/:id', async (req, res)=>{
+router.put('/updateCourse/:id',authenticateJWT, async (req, res)=>{
     try{
         var changes=[];
         const id = req.params.id;
@@ -70,7 +70,7 @@ router.put('/updateCourse/:id', async (req, res)=>{
     }
 })
 
-router.delete('/deleteCourse/:id',async (req,res)=>{
+router.delete('/deleteCourse/:id',authenticateJWT,async (req,res)=>{
     try{
         const id = req.params.id;
         const deltedCourse = await courses.findOneAndDelete({courseID : id});
