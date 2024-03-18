@@ -1,6 +1,6 @@
 import { useEffect , useState} from "react";
 import { useNavigate } from "react-router-dom";
-
+ 
 function Dashboard() {
     const [courses,setCourses] = useState([])
     const navigate = useNavigate();
@@ -63,7 +63,7 @@ function Dashboard() {
     return  (
         <div>
             <button onClick={logout}>Logout</button>
-            <div>
+             <div>
             {courses.map(course => (
                 <div key={course._id}>
                     <h3>{course.courseTitle}</h3>
