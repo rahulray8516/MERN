@@ -6,7 +6,7 @@ function Dashboard() {
     const navigate = useNavigate();
 
 
-    useEffect(()=> {
+    useEffect(() => {
         const token = localStorage.getItem('token');
         if(!token){
             alert("Token Empty's")
