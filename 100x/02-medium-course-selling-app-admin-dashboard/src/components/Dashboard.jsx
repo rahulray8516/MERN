@@ -1,6 +1,6 @@
 import { useEffect , useState} from "react";
 import { useNavigate } from "react-router-dom";
- 
+import { Button } from "@mui/material";
 function Dashboard() {
     const [courses,setCourses] = useState([])
     const navigate = useNavigate();
@@ -62,7 +62,7 @@ function Dashboard() {
         
     return  (
         <div>
-            <button onClick={logout}>Logout</button>
+            <Button variant="contained" onClick={logout}>Logout</Button>
              <div>
             {courses.map(course => (
                 <div key={course._id}>
@@ -74,8 +74,8 @@ function Dashboard() {
                     <p>Price: {course.coursePrice}</p>
                     <p>Posted by: {course.isPostedby}</p>
                     <p>Purchased by: {course.isPurchasedBy}</p>
-                    <button onClick>Update</button>
-                    <button onClick>Delete</button>
+                    <Button onClick>Update</Button>
+                    <Button onClick>Delete</Button>
                 </div>
                 ))}
             </div>

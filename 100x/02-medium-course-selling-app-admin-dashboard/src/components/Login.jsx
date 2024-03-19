@@ -1,11 +1,13 @@
 import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Card, TextField, colors } from "@mui/material";
+import AppBar from "./Appbar";
 
 /// File is incomplete. You need to add input boxes to take input for users to login.
 function Login() {
     const [userName,setUserName] = useState("")
     const [password,setPassword] = useState("")
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleLogin = async() => {
         loginUser()
         console.log(`${userName},${password}`);
@@ -36,14 +38,19 @@ function Login() {
     }
 
     return <div>
-        <h1>Login to admin dashboard</h1>
         <br/>
-        userName - <input type="text" value={userName} onChange={e => setUserName(e.target.value)} />
+        <AppBar/>
+        <center>
+        
+        <Card variant={"outlined"} style={{'padding':'5%','marginTop':'6%','width':'40%','marginLeft':''}} >
+        <h4>Login to admin dashboard</h4>
+        <TextField id="outlined-basic" label="Username" variant="outlined" onChange={e=> setUserName(e.target.value)} /><br/><br/>    
+        <TextField type='password' label="Password" variant='outlined' onChange={(e)=>{setPassword(e.target.value)}} /><br/><br/>
+        <Button onClick={handleLogin}>Login</Button>
         <br/>
-        password - <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
-        <button onClick={handleLogin}>Login</button>
-        <br/>
-        New here? <a href="/register">Register</a>
+        New here? <Button><a href="/register">Register</a></Button>
+        </Card>
+        </center>
     </div>
 }
 
