@@ -19,7 +19,7 @@ function Dashboard() {
             navigate('/login')
         }
         fetchCourses();
-    },[navigate])
+    },[])
 
     const logout = async () => {
         let token = await localStorage.getItem('token');
@@ -60,22 +60,26 @@ function Dashboard() {
             console.log(error.message)
             }
         }
+    const handleViewCourse = async(courseID) => {
+        navigate('/courses/'+courseID)
+    }
         
     return  (
         <div>
             <Button variant="contained" onClick={logout}>Logout</Button>
-             <div>
+            <div>
             {courses.map(course => (
                 <div key={course._id}>
                     <h3>{course.courseTitle}</h3>
                     <p>{course.courseDescription}</p>
+                    <p>{course.courseID}</p>
                     <img src={course.courseImage} 
                         alt={course.courseTitle} 
-                        style={{width: '15vw'}} />
+                        style={{width :'15vw'}} />
                     <p>Price: {course.coursePrice}</p>
                     <p>Posted by: {course.isPostedby}</p>
                     <p>Purchased by: {course.isPurchasedBy}</p>
-                    <Button onClick>Update</Button>
+                    <Button onClick={()=>handleViewCourse(course.courseID)}>View Course</Button>
                     <Button onClick>Delete</Button>
                 </div>
                 ))}

@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
-import AppBar from "./Appbar";
-function UpdateCourses() {
+import { useNavigate } from "react-router-dom";
+
+function ViewOneCourse() {
 
   let courseID = useParams();
   
   const [courses,setCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=>{
-    console.log(courseID)
-    fetchCourse();
-  },[])
+    fetchCourse(courseID);
+  },[courseID])
 
-  const fetchCourse = async () => {
+  const fetchCourse = async(id) => {
     try {
-      const response = await fetch(`http://100.93.3.137:3001/courses/courses/${courseID}`, {
+      const response = await fetch(`http://100.93.3.137:3001/courses/courses/${id.courseID}`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +40,7 @@ function UpdateCourses() {
 
   return <div>
     <div>
-        <AppBar/>
+        <Button onClick={()=>navigate('/dashboard')}>DashBoard</Button>
     </div>
      <div>
             {courses.map(course => (
@@ -60,4 +61,5 @@ function UpdateCourses() {
   </div>
 }
 
-export default UpdateCourses;
+
+export default ViewOneCourse;
