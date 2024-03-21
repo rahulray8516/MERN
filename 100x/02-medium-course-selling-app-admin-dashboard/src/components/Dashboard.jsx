@@ -54,6 +54,7 @@ function Dashboard() {
                 console.log(data)
             }else{
                 console.log("Fetching Error")
+                logout()
             }
         }catch(error){
             console.log(error.message)

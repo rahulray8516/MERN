@@ -1,9 +1,10 @@
 var jwt = require('jsonwebtoken')
 
-var secretKey = "Sec3et"
+var secretKey = "Sec3et";
 var options = {
-    expiresIn : '1h'
-}
+    expiresIn: '1h'
+};
+
 const generateJWT = (userName) => {
     const payload = {userName}//payload always be object not string
     return jwt.sign(payload,secretKey,options)

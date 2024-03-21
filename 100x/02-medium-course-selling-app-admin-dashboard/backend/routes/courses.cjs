@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {authenticateJWT} = require('../auth/auth.cjs')
 const courses = require('../model/courses.cjs') 
+
 router.get('/courses',authenticateJWT,async(req,res)=>{
     console.log(req.headers)
     try{
@@ -11,6 +12,24 @@ router.get('/courses',authenticateJWT,async(req,res)=>{
         console.log(error)
         res.status(500).send({
             message : "Error in Fetching Data",
+            error : error.message
+        })
+    }
+})
+
+router.get('/courses/:courseID',authenticateJWT, async(req,res)=>{
+    try{
+            const id = req.params.courseID
+            const course = await courses.find({courseID:id})
+            if(!course){
+                return res.status(404).send({
+                    message:"No Course Found with given id : " + id
+                })
+            }
+            res.send(course)
+    }catch(error){
+        res.status(404).send({
+            message: 'Error In catch Statement',
             error : error.message
         })
     }
