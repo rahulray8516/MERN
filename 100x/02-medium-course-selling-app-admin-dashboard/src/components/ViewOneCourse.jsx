@@ -63,41 +63,42 @@ function ViewOneCourse() {
                     <p>Price: {course.coursePrice}</p>
                     <p>Posted by: {course.isPostedby}</p>
                     <p>Purchased by: {course.isPurchasedBy}</p>
-                    <Button onClick={()=>handleUpdate(course.courseID)}>Edit</Button>
+                    <Button onClick={()=>handleUpdate(course._id)}>Edit</Button>
                     {/* <Button onClick={()=>showCourse()}>ShowCourse</Button> */}
                     <Button>Delete</Button>
                     
                 </div>
                 ))}
             </div>
-            {showUpdate && <UpdateOneCourse courseID={currCourse}/> }
+            {showUpdate && <UpdateOneCourse courseID={currCourse} 
+            course={courses.find(a => a._id === currCourse)} />}
   </div>
 }
 
 
 function UpdateOneCourse(props){
-  console.log("from updateonecourse "+ JSON.stringify(props));
-    const [title,setTitle] = useState("")
-    const [description,setDescription] = useState("")
-    const [image,setImage] = useState("")
-    const [price,setPrice] = useState("");
+  console.log("Props : "+ JSON.stringify(props));
+    const [courseTitle,setTitle] = useState("")
+    const [courseDescription,setDescription] = useState("")
+    const [courseImage,setImage] = useState("")
+    const [coursePrice,setPrice] = useState("");
 
     //get the data from server and display in for
 
     const updateTheCourse = async() => {
       try{
-        const response = await fetch(`/updateCourse/cs102`,{
+          const response = await fetch(`http://100.93.3.137:3001/courses/updateCourse/${props.courseID}`,{
             method:"PUT",
             headers: {
               'Content-Type': 'application/json',
               'Authorization' : 'Bearer ' + localStorage.getItem('token')
             },
-            body :{
-              title,
-              description,
-              image,
-              price
-            }
+            body :JSON.stringify({
+              courseTitle : courseTitle,
+              courseDescription: courseDescription,
+              courseImage : courseImage,
+              coursePrice : coursePrice
+            })
           });
           const data = await response.json(); // Await the JSON parsing
     
@@ -116,8 +117,8 @@ function UpdateOneCourse(props){
     return <div>
         <center>
         <Card variant={"outlined"} style={{'padding':'5%','marginTop':'6%','width':'40%','marginLeft':''}} >
-        <h4>Please update the course with Course title</h4>
-        <TextField id="outlined-basic" label="title" variant="outlined" onChange={e=> setTitle(e.target.value)} /><br/><br/>    
+        <h4>Please update the course with Course title</h4> 
+        <TextField id="outlined-basic" label="Title" variant="outlined" onChange={e=> setTitle(e.target.value)} /><br/><br/>    
         <TextField label="Description" variant='outlined' onChange={(e)=>{setDescription(e.target.value)}} /><br/><br/>
         <TextField label="Image" variant='outlined' onChange={(e)=>{setImage(e.target.value)}} /><br/><br/>
         <TextField label="Price" variant='outlined' onChange={(e)=>{setPrice(e.target.value)}} /><br/><br/>

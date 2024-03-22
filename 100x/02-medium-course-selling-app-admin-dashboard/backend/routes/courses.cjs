@@ -54,11 +54,11 @@ router.put('/updateCourse/:id',authenticateJWT, async (req, res)=>{
         var changes=[];
         const id = req.params.id;
         const updates = req.body;
-        const existedCourse = await courses.findOne({courseID:id})
+        const existedCourse = await courses.findOne({_id:id})
         if(!existedCourse){
             return res.status(404).send("No Course Found")
         }
-        //Updating only those fields which are changed
+        //Updating only those fields which are changed by user
         Object.keys(updates).forEach((key)=>{
                 if(updates[key]!==null){
                     if(existedCourse[key]!==updates[key]){
