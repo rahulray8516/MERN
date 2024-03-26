@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, TextField, colors } from "@mui/material";
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 function ViewOneCourse() {
   let courID = useParams()  
-  const [courses,setCourses] = useState([]);
+  const [courses, setCourses] = useRecoilState(coursesState);
   const [currCourse,setCurrCourse] = useState("")
   const [showUpdate, setShowUpdate] = useState(false);
   const navigate = useNavigate();
@@ -64,7 +65,6 @@ function ViewOneCourse() {
                     <p>Posted by: {course.isPostedby}</p>
                     <p>Purchased by: {course.isPurchasedBy}</p>
                     <Button onClick={()=>handleUpdate(course._id)}>Edit</Button>
-                    {/* <Button onClick={()=>showCourse()}>ShowCourse</Button> */}
                     <Button>Delete</Button>
                     
                 </div>
@@ -77,15 +77,18 @@ function ViewOneCourse() {
 
 
 function UpdateOneCourse(props){
-  console.log("Props : "+ JSON.stringify(props));
-    const [courseTitle,setTitle] = useState("")
-    const [courseDescription,setDescription] = useState("")
-    const [courseImage,setImage] = useState("")
-    const [coursePrice,setPrice] = useState("");
+  console.log("Props : "+ JSON.stringify(props)+Date());
+  console.log(props.course.courseTitle);
+    const count = 0.00;
+    const [courseTitle,setTitle] = useState(props.course.courseTitle)
+    const [courseDescription,setDescription] = useState(props.course.courseDescription)
+    const [courseImage,setImage] = useState(props.course.courseImage)
+    const [coursePrice,setPrice] = useState(props.course.coursePrice);
 
     //get the data from server and display in for
 
     const updateTheCourse = async() => {
+
       try{
           const response = await fetch(`http://100.93.3.137:3001/courses/updateCourse/${props.courseID}`,{
             method:"PUT",
@@ -94,10 +97,10 @@ function UpdateOneCourse(props){
               'Authorization' : 'Bearer ' + localStorage.getItem('token')
             },
             body :JSON.stringify({
-              courseTitle : courseTitle,
-              courseDescription: courseDescription,
-              courseImage : courseImage,
-              coursePrice : coursePrice
+              courseTitle,
+              courseDescription,
+              courseImage,
+              coursePrice
             })
           });
           const data = await response.json(); // Await the JSON parsing
@@ -117,11 +120,12 @@ function UpdateOneCourse(props){
     return <div>
         <center>
         <Card variant={"outlined"} style={{'padding':'5%','marginTop':'6%','width':'40%','marginLeft':''}} >
+
         <h4>Please update the course with Course title</h4> 
-        <TextField id="outlined-basic" label="Title" variant="outlined" onChange={e=> setTitle(e.target.value)} /><br/><br/>    
-        <TextField label="Description" variant='outlined' onChange={(e)=>{setDescription(e.target.value)}} /><br/><br/>
-        <TextField label="Image" variant='outlined' onChange={(e)=>{setImage(e.target.value)}} /><br/><br/>
-        <TextField label="Price" variant='outlined' onChange={(e)=>{setPrice(e.target.value)}} /><br/><br/>
+        <TextField id="outlined-basic" value={courseTitle} variant="outlined" onChange={e=> setTitle(e.target.value)} /><br/><br/>    
+        <TextField value={courseDescription} variant='outlined' onChange={(e)=>{setDescription(e.target.value)}} /><br/><br/>
+        <TextField value={courseImage} variant='outlined' onChange={(e)=>{setImage(e.target.value)}} /><br/><br/>
+        <TextField value={coursePrice} variant='outlined' onChange={(e)=>{setPrice(e.target.value)}} /><br/><br/>
         <Button onClick={updateTheCourse}>Update</Button>
         <br/>
         </Card>
@@ -129,3 +133,8 @@ function UpdateOneCourse(props){
     </div>
 }
 export default ViewOneCourse;
+
+const coursesState = atom({
+  key: 'coursesState',
+  default: [], 
+});

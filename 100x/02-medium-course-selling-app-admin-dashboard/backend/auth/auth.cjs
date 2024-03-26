@@ -2,7 +2,7 @@ var jwt = require('jsonwebtoken')
 
 var secretKey = "Sec3et";
 var options = {
-    expiresIn: '1h'
+    expiresIn: '10h'
 };
 
 const generateJWT = (userName) => {
