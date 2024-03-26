@@ -79,16 +79,13 @@ function ViewOneCourse() {
 function UpdateOneCourse(props){
   console.log("Props : "+ JSON.stringify(props)+Date());
   console.log(props.course.courseTitle);
-    const count = 0.00;
     const [courseTitle,setTitle] = useState(props.course.courseTitle)
     const [courseDescription,setDescription] = useState(props.course.courseDescription)
     const [courseImage,setImage] = useState(props.course.courseImage)
     const [coursePrice,setPrice] = useState(props.course.coursePrice);
 
-    //get the data from server and display in for
-
+    //get the data from server and display in for the updaed course
     const updateTheCourse = async() => {
-
       try{
           const response = await fetch(`http://100.93.3.137:3001/courses/updateCourse/${props.courseID}`,{
             method:"PUT",
@@ -108,12 +105,36 @@ function UpdateOneCourse(props){
           if (response.status === 200) { // Corrected to === for comparison
             console.log(data)
             console.log("Data Fetched Successfully");
+            setTimeout(viewOneUpdatedCourse, 1000);
           } else {
             console.log('Error In Fetching Data');
           }
         } catch (error) {
           console.log(error.message);
           alert('Error in Fetching Course');
+        }
+    }
+
+    const viewOneUpdatedCourse = async() =>{
+        try {
+            const response = await fetch(`http://100.93.3.137:3001/courses/updatedcourse/${props.courseID}`,{
+              method : "GET",
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer '+ localStorage.getItem('token')
+              },
+              
+            })
+            console.log("response is :",response)
+            const data = await response.json();
+            if(response.status === 200){
+              console.log("DATA Updated Succcesssssfuuuuulllly",data)
+            }else{
+              console.log("viewOneUpdatedCourse data fetching errorr")
+            }
+        } catch (error) {
+          console.log(error)
+          console.log(error.message)
         }
     }
 

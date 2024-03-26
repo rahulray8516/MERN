@@ -17,6 +17,25 @@ router.get('/courses',authenticateJWT,async(req,res)=>{
     }
 })
 
+//router for getting the course after update
+router.get('/updatedcourse/:courseID',authenticateJWT,async(req,res)=>{
+    try{
+        const id = req.params.courseID
+        const course = await courses.findById(id)
+        if(!course){
+            return res.status(404).send({
+                message:"No Course Found with given id : " + id
+            })
+        }
+        res.send(course)
+}catch(error){
+    res.status(404).send({
+        message: 'Error In catch Statement',
+        error : error.message
+    })
+}
+})
+
 router.get('/courses/:courseID',authenticateJWT, async(req,res)=>{
     try{
             const id = req.params.courseID
