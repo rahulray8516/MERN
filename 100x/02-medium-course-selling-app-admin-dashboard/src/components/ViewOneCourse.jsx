@@ -10,6 +10,7 @@ function ViewOneCourse() {
   const [currCourse,setCurrCourse] = useState("")
   const [showUpdate, setShowUpdate] = useState(false);
   const [isUpdate,setIsUpdate] = useState(false)
+  const [updateKey,setUpdateKey] = useState(0)
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -53,6 +54,7 @@ function ViewOneCourse() {
   const handleUpdate = (courseID) => {
     setShowUpdate(true)
     setCurrCourse(courseID)
+    setUpdateKey(prev => prev+1)
    }
 
   return <div>
@@ -76,7 +78,7 @@ function ViewOneCourse() {
                 </div>
                 ))}
             </div>
-            {showUpdate && <UpdateOneCourse courseID={currCourse} 
+            {showUpdate && <UpdateOneCourse courseID={currCourse} key={updateKey}
             course={courses.find(a => a._id === currCourse)} onUpdate={onUpdate} />}
   </div>
 }
