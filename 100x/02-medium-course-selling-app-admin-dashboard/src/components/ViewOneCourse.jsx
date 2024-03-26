@@ -9,11 +9,17 @@ function ViewOneCourse() {
   const [courses, setCourses] = useRecoilState(coursesState);
   const [currCourse,setCurrCourse] = useState("")
   const [showUpdate, setShowUpdate] = useState(false);
+  const [isUpdate,setIsUpdate] = useState(false)
   const navigate = useNavigate();
 
   useEffect(()=>{
     fetchCourse(courID);
-  },[courID])
+  },[courID,isUpdate])
+
+  const onUpdate = async() => {
+      setIsUpdate(!isUpdate)
+      console.log("inside onUpdate")
+  }
 
   const fetchCourse = async(id) => {
     try {
@@ -71,7 +77,7 @@ function ViewOneCourse() {
                 ))}
             </div>
             {showUpdate && <UpdateOneCourse courseID={currCourse} 
-            course={courses.find(a => a._id === currCourse)} />}
+            course={courses.find(a => a._id === currCourse)} onUpdate={onUpdate} />}
   </div>
 }
 
@@ -84,7 +90,12 @@ function UpdateOneCourse(props){
     const [courseImage,setImage] = useState(props.course.courseImage)
     const [coursePrice,setPrice] = useState(props.course.coursePrice);
 
-    //get the data from server and display in for the updaed course
+    
+
+    const refeshCheck = () => {
+       updateTheCourse()
+    }
+    //get the data from server and display in for the updtaed course
     const updateTheCourse = async() => {
       try{
           const response = await fetch(`http://100.93.3.137:3001/courses/updateCourse/${props.courseID}`,{
@@ -105,7 +116,7 @@ function UpdateOneCourse(props){
           if (response.status === 200) { // Corrected to === for comparison
             console.log(data)
             console.log("Data Fetched Successfully");
-            setTimeout(viewOneUpdatedCourse, 1000);
+            props.onUpdate()
           } else {
             console.log('Error In Fetching Data');
           }
@@ -129,6 +140,7 @@ function UpdateOneCourse(props){
             const data = await response.json();
             if(response.status === 200){
               console.log("DATA Updated Succcesssssfuuuuulllly",data)
+
             }else{
               console.log("viewOneUpdatedCourse data fetching errorr")
             }
@@ -147,7 +159,7 @@ function UpdateOneCourse(props){
         <TextField value={courseDescription} variant='outlined' onChange={(e)=>{setDescription(e.target.value)}} /><br/><br/>
         <TextField value={courseImage} variant='outlined' onChange={(e)=>{setImage(e.target.value)}} /><br/><br/>
         <TextField value={coursePrice} variant='outlined' onChange={(e)=>{setPrice(e.target.value)}} /><br/><br/>
-        <Button onClick={updateTheCourse}>Update</Button>
+        <Button onClick={refeshCheck}>Update</Button>
         <br/>
         </Card>
         </center>
