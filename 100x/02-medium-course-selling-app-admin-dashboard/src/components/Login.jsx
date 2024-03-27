@@ -1,16 +1,18 @@
-import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, TextField, colors } from "@mui/material";
+import { Button, Card, TextField } from "@mui/material";
 import AppBar from "./Appbar";
+import { useRecoilState } from "recoil";
+import {varUserName,varPassword} from '../atoms/loginAtom';
 
 /// File is incomplete. You need to add input boxes to take input for users to login.
-function Login() {
-    const [userName,setUserName] = useState("")
-    const [password,setPassword] = useState("")
+function Login(){
+
+    const [userName,setUserName] = useRecoilState(varUserName);
+    const [password,setPassword] = useRecoilState(varPassword);
     const navigate = useNavigate();
     const handleLogin = async() => {
         loginUser()
-        console.log(`${userName},${password}`);
+        // console.log(`${userName},${password}`);
     }
     const loginUser = async() => {
         try{
@@ -41,7 +43,6 @@ function Login() {
         <br/>
         <AppBar/>
         <center>
-        
         <Card variant={"outlined"} style={{'padding':'5%','marginTop':'6%','width':'40%','marginLeft':''}} >
         <h4>Login to admin dashboard</h4>
         <TextField id="outlined-basic" label="Username" variant="outlined" onChange={e=> setUserName(e.target.value)} /><br/><br/>    
