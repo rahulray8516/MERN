@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, TextField } from "@mui/material";
 import AppBar from "./Appbar";
 import { useRecoilState } from "recoil";
-import {varUserName,varPassword} from '../atoms/loginAtom';
+import {varUserName,varPassword} from '../atoms/Atom';
 
 /// File is incomplete. You need to add input boxes to take input for users to login.
 function Login(){
