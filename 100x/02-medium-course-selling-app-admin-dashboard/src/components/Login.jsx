@@ -12,7 +12,7 @@ function Login(){
     const navigate = useNavigate();
     const handleLogin = async() => {
         loginUser()
-        // console.log(`${userName},${password}`);
+        console.log(`${userName},${password}`);
     }
     const loginUser = async() => {
         try{

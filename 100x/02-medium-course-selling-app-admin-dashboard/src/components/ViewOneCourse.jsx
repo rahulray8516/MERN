@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, TextField, colors } from "@mui/material";
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { Button, Card, TextField } from "@mui/material";
+import { atom, useRecoilState} from "recoil";
 
 function ViewOneCourse() {
   let courID = useParams()  
@@ -45,12 +45,6 @@ function ViewOneCourse() {
       alert('Error in Fetching Course');
     }
   }
-
-  // const showCourse=()=>{
-  //   console.log("Inside showCourse")
-  //   console.log("currCourse + ",currCourse)
-  // }
-
   const handleUpdate = (courseID) => {
     setShowUpdate(true)
     setCurrCourse(courseID)
