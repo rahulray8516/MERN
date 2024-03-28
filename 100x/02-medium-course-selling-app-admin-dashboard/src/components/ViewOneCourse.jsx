@@ -56,7 +56,7 @@ function ViewOneCourse() {
         <Button onClick={()=>navigate('/dashboard')}>DashBoard</Button>
     </div>
      <div>
-            {courses.map(course => (
+            {courses.map(course => ( 
                 <div key={course._id}>
                     <h3>{course.courseTitle}</h3>
                     <p>{course.courseDescription}</p>
