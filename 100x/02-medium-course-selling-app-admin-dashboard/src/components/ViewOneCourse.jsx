@@ -68,7 +68,6 @@ function ViewOneCourse() {
                     <p>Purchased by: {course.isPurchasedBy}</p>
                     <Button onClick={()=>handleUpdate(course._id)}>Edit</Button>
                     <Button>Delete</Button>
-                    
                 </div>
                 ))}
             </div>

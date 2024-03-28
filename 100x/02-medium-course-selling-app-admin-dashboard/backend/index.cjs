@@ -8,6 +8,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 //mongoose Connection
+const connectionStringLocal = "mongodb://localhost:27017/"
 const connectionString = "mongodb+srv://rahulray8518:rahulray85188101@cluster0.oveeh21.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect(connectionString)
 mongoose.connection.on('connected', () => {
